@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 指定数据库方言 -->
+    <properties>
+        <property name="dialect" value="mysql" />
+    </properties>
+    <!-- 统一配置对应类名 -->
+    <typeAliases>
+        <!-- 这样会将com.xxx.model包及其子包下的所有类起别名为相应的简单类名 -->
+        <!-- <package name="com.cn.user.pojo"/> -->
+        <!-- 如果这样去起别名的话，每一个模型类都要写一个，就比较麻烦 -->
+        <!-- <typeAlias alias="user" type="com.cn.user.pojo.User"/> -->
+        <typeAlias alias="User" type="com.cn.user.pojo.User"/>
+        <typeAlias alias="Person" type="com.cn.person.pojo.Person"/>
+    </typeAliases>
+    <!-- 可以采用这种方式配置mappers -->
+    <!-- <mappers>
+		<mapper resource="com/cn/user/mapping/userMapper.xml"></mapper>
+	</mappers> -->
+    
+</configuration>
