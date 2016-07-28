@@ -82,7 +82,7 @@
 	<!--配置事务的切面-->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="save*" read-only="true" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.Exception" />
 			<tx:method name="*" read-only="true" propagation="REQUIRED" rollback-for="java.lang.Exception" />
 		</tx:attributes>
 	</tx:advice>

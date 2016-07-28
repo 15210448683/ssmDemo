@@ -11,7 +11,9 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.cn.*.controller" />
-	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
+
+
+	<!--避免IE执行AJAX时，返回JSON出现下载文件  已废弃
 	<bean id="mappingJacksonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 		<property name="supportedMediaTypes">
@@ -19,17 +21,55 @@
 				<value>text/html;charset=UTF-8</value>
 			</list>
 		</property>
-	</bean>
-	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
-	<bean	class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
+	</bean>-->
+	<!--spring4.0 使用的返回json-->
+	<bean id="mappingJacksonHttpMessageConverter"
+		  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
 			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" />	<!-- JSON转换器 -->
+				<value>text/html;charset=UTF-8</value>
 			</list>
 		</property>
 	</bean>
-	<!-- 还要加入DefaultAnnotationHandlerMapping，不然会被 XML的映射覆盖！ --> 
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />      
+
+
+	<!--添加注解功能 start  -->
+	<!--以下几个是spring3.0版本注解功能 已废弃  -->
+	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射
+	<bean	class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />-->	<!-- JSON转换器
+			</list>
+		</property>
+	</bean>-->
+	<!-- 还要加入DefaultAnnotationHandlerMapping，不然会被 XML的映射覆盖！
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />-->
+	<!-- 启用spring mvc 注解
+	<context:annotation-config />-->
+	<mvc:annotation-driven />
+	<!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射-->
+	<bean	class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />	<!-- JSON转换器-->
+			</list>
+		</property>
+	</bean>
+	<!-- 还要加入RequestMappingHandlerMapping，不然会被 XML的映射覆盖！-->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" >
+		<!--加入拦截器-->
+		<property name="interceptors">
+			<list>
+				<ref bean="httpRequestInterceptor"/>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!--添加注解功能 end  -->
+
 	<!--加入SimpleControllerHandlerAdapter 否则xml配置会报异常 -->    
 	<bean  class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
 	
@@ -50,7 +90,10 @@
         <property name="maxUploadSize" value="10485760000" />  
         <!-- 内存中的最大值 -->
         <property name="maxInMemorySize" value="40960" />  
-    </bean> 
+    </bean>
+
+	<!-- handler处理之前，可以有拦截器，继承HandlerInterceptor接口就ok -->
+	<bean id="httpRequestInterceptor" class="com.cn.interceptor.HttpRequestInterceptor"></bean>
     
     
 	
