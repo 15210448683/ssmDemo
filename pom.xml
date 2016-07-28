@@ -170,6 +170,12 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.12</version>
 		</dependency>
+		<!--添加servlet-api的依赖-->
+		<dependency>
+	            <groupId>javax.servlet</groupId>
+	            <artifactId>javax.servlet-api</artifactId>
+	            <version>3.1.0</version>
+	        </dependency>
 		
 		
 		
