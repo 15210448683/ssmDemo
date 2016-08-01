@@ -203,9 +203,9 @@
 			  </configuration>
 		  </plugin>
 	  </plugins>
-	  <!--配置Maven 对resource文件 过滤 防止mybatis的mapper.xml丢失 -->
-	  <resources>
-
+	  <!--配置Maven 对resource文件 过滤 防止mybatis的mapper.xml丢失  start-->
+	  <!--在idea中需要将其放开,eclipse将其关闭-->
+	  <!--<resources>
 		  <resource>
 			  <directory>src/main/java</directory>
 			  <includes>
@@ -214,6 +214,7 @@
 			  </includes>
 			  <filtering>true</filtering>
 		  </resource>
-	  </resources>
+	  </resources>-->
+	   <!--配置Maven 对resource文件 过滤 防止mybatis的mapper.xml丢失  end-->
   </build>
 </project>
