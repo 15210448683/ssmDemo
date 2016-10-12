@@ -30,7 +30,8 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${driver}" />
-		<property name="url" value="${url}" />
+		<!--如果写为${url}  url可能会被maven 替换为http://maven.apache.org-->
+		<property name="url" value="${db.jdbc.url}" />
 		<property name="username" value="${username}" />
 		<property name="password" value="${password}" />
 		<!-- 初始化连接大小 -->
@@ -76,13 +77,13 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<!--开启spring对事务的支持-->
+	<!--声明使用注解式事务,开启spring对事务的支持-->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 	
 	<!--配置事务的切面-->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="save*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" read-only="false" propagation="REQUIRED"  rollback-for="java.lang.Exception" />
 			<tx:method name="*" read-only="true" propagation="REQUIRED" rollback-for="java.lang.Exception" />
 		</tx:attributes>
 	</tx:advice>

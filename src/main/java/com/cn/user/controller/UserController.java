@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.user.pojo.User;
@@ -71,4 +73,12 @@ public class UserController {
 		userService.del(id);		
 		return new ModelAndView("redirect:/user/main");
 	}
+
+	@RequestMapping("/jsonTest")
+	@ResponseBody
+	public User jsonTest(@RequestParam("id")Integer id, ModelMap modelMap){
+		User user = this.userService.getUserById(id);
+		return user;
+	}
+
 }

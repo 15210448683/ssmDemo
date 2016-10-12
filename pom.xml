@@ -142,12 +142,12 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<!-- log end -->
-		<!-- 映入JSON-->
-		<!--<dependency>
+		<!-- 映入JSON 加入json后可以使用@ResponseBody-->
+		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>

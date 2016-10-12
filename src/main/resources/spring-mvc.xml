@@ -16,6 +16,8 @@
 		<!--扫描以下的内容,但不仅仅包含他,其它的也会扫描-->
 		<!--<context:include-filter type="" expression=""></context:include-filter>-->
 	</context:component-scan>
+	<!-- 启用spring mvc 注解-->
+	<mvc:annotation-driven />
 
 	<!--spring3.0版本注解功能及json功能 均已废弃,仍然可以使用   start-->
 
